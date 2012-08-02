@@ -1,0 +1,3 @@
+[
+    { "keys": ["super+t"], "command": "open_terminal" }
+]
