@@ -1,0 +1,20 @@
+{
+    "schema_version": "1.0",
+    "packages": [
+        {
+            "name": "MacTerminal",
+            "description": "Open terminal on current file folder in a new tab.",
+            "author": "afterdesign",
+            "homepage": "https://github.com/afterdesign/MacTerminal",
+            "last_modified": "2012-10-22 20:46:31",
+            "platforms": {
+                "osx": [
+                    {
+                        "version": "1.0",
+                        "url": "https://nodeload.github.com/afterdesign/MacTerminal/zipball/master"
+                    }
+                ]
+            }
+        }
+    ]
+}
