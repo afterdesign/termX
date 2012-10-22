@@ -4,9 +4,9 @@
         {
             "name": "MacTerminal",
             "description": "Open terminal on current file folder in a new tab.",
-            "author": "afterdesign",
+            "author": "Rafał 'afterdesign' Malinowski",
             "homepage": "https://github.com/afterdesign/MacTerminal",
-            "last_modified": "2012-10-22 20:46:31",
+            "last_modified": "2012-10-22 20:50",
             "platforms": {
                 "osx": [
                     {
