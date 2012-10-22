@@ -12,20 +12,20 @@
                 "children":
                 [
                     {
-                        "caption": "Terminal",
+                        "caption": "MacTerminal",
                         "children":
                         [
                             {
                                 "command": "open_file", "args":
                                 {
-                                    "file": "${packages}/Terminal/Terminal.sublime-settings"
+                                    "file": "${packages}/MacTerminal/MacTerminal.sublime-settings"
                                 },
                                 "caption": "Settings – Default"
                             },
                             {
                                 "command": "open_file", "args":
                                 {
-                                    "file": "${packages}/User/Terminal.sublime-settings"
+                                    "file": "${packages}/User/MacTerminal.sublime-settings"
                                 },
                                 "caption": "Settings – User"
                             },
@@ -33,7 +33,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/Terminal/Default.sublime-keymap"
+                                    "file": "${packages}/MacTerminal/Default.sublime-keymap"
                                 },
                                 "caption": "Key Bindings – Default"
                             },

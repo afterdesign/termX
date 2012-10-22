@@ -1,0 +1,3 @@
+{
+    "command"   :  ["osascript", "%(packages_dir)s/MacTerminal/MacTerminal.scpt"]
+}

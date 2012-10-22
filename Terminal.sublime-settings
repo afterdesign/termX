@@ -1,3 +1,0 @@
-{
-    "command"   :  ["osascript", "%(packages_dir)s/Terminal/Terminal.scpt"]
-}
