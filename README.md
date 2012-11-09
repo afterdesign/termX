@@ -8,5 +8,5 @@
 # How to install ?
 ```
 cd $PATH_OF_SUBLIME_PACKAGES
-git clone git://github.com/afterdesign/Terminal.git
+git clone git://github.com/afterdesign/MacTerminal.git
 ```
