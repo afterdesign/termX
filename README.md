@@ -6,7 +6,15 @@
 4. Added some cool script for linux/windows ? Do a pull request !
 
 # How to install ?
+###From git:
 ```
 cd $PATH_OF_SUBLIME_PACKAGES
 git clone git://github.com/afterdesign/MacTerminal.git
 ```
+
+### From [package control](http://wbond.net/sublime_packages/package_control)
+Just type MacTerminal
+
+#Contact
+
+You can follow me on twitter: [@afterdesign](http://twitter.com/afterdesign)
