@@ -27,7 +27,12 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
         command = [subcommand % {"packages_dir" : sublime.packages_path()} for subcommand in settings.get("command")]
 
         #add path
-        command.append(os.path.dirname(self.view.file_name()))#pylint: disable-msg=E1101
+        if self.view.file_name() is not None:
+            command.append(os.path.dirname(self.view.file_name()))#pylint: disable-msg=E1101
+        elif self.view.window().active_view().file_name() is not None:
+            command.append(os.path.dirname(self.view.window().active_view().file_name()))#pylint: disable-msg=E1101
+        else:
+            print "This may be a bug, please create issue on github"
 
         #open terminal
         subprocess.Popen(command)#pylint: disable-msg=E1101
