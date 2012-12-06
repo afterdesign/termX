@@ -18,3 +18,7 @@ Just type MacTerminal
 #Contact
 
 You can follow me on twitter: [@afterdesign](http://twitter.com/afterdesign)
+
+#License
+
+Licensed under the MIT license.
