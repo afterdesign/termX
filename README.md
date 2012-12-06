@@ -21,4 +21,4 @@ You can follow me on twitter: [@afterdesign](http://twitter.com/afterdesign)
 
 #License
 
-Licensed under the MIT license.
+Licensed under the [MIT license](http://opensource.org/licenses/MIT).
