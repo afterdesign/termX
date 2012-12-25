@@ -38,7 +38,24 @@ Just type MacTerminal
 	this is just a sublime bug or I need to change something. 
 		For now I saw the same behavior in   
 	
-4. Its not working for me.
+4. How to I use it with iTerm 2 ?
+	Simply go to:
+
+	```
+	Sublime Text 2 -> Preferences -> Package Settings -> Macterminal -> Settings - User
+	```
+	
+	and add:
+	
+	```
+	{
+    	"terminal"   :  "iterm"
+	}
+	```
+	
+	If you wish you can also change it in Settings - Default.
+
+5. Its not working for me.
 
 	Well then check your python console in sublime (default shortcut is ``` ctrl+` ```) 
 	and you can always ping me on [twitter](http://twitter.com/afterdeign) or 
