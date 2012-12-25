@@ -1,3 +1,4 @@
 *.pyc
 .tags
 .DS_Store
+package-metadata.json
