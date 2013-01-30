@@ -25,6 +25,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
         settings = sublime.load_settings('MacTerminal.sublime-settings')
         terminal_name = settings.get("terminal")
         default_path = settings.get("default-path")
+        
         if len(terminal_name) == 0:
             return
 
@@ -45,12 +46,11 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
             command.append(os.path.dirname(self.view.file_name()))#pylint: disable-msg=E1101
         elif self.view.window().active_view().file_name() is not None:
             command.append(os.path.dirname(self.view.window().active_view().file_name()))#pylint: disable-msg=E1101
+        elif len(default_path) > 0:
+            exp_path = os.path.normpath(os.path.expanduser(default_path))
+            command.append(exp_path)
         else:
-            if len(default_path) > 0:
-                exp_path = os.path.normpath(os.path.expanduser(default_path))
-                command.append(exp_path)
-            else:
-                print "This may be a bug, please create issue on github"
+            print "This may be a bug, please create issue on github"
 
         print command
 

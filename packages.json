@@ -6,11 +6,11 @@
             "description": "Open terminal/iterm 2 on current file folder in a new tab.",
             "author": "Rafał 'afterdesign' Malinowski",
             "homepage": "https://github.com/afterdesign/MacTerminal",
-            "last_modified": "2012-12-25 13:22",
+            "last_modified": "2013-01-30 19:37",
             "platforms": {
                 "osx": [
                     {
-                        "version": "1.1.0",
+                        "version": "1.2.0",
                         "url": "https://nodeload.github.com/afterdesign/MacTerminal/zip/master"
                     }
                 ]
