@@ -2,6 +2,7 @@
 
 1. Fully packaged
 2. Currently with option to open new tab on OS X (works fine on 10.8)
+3. Sublime Text 3 beta support
 
 # How to install ?
 ### From git:
