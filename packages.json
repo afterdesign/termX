@@ -3,7 +3,7 @@
     "packages": [
         {
             "name": "MacTerminal",
-            "description": "Open terminal/iterm 2 on current file folder in a new tab.",
+            "description": "Open terminal/iterm 2 on current file folder (new tab support).",
             "author": "Rafał 'afterdesign' Malinowski",
             "homepage": "https://github.com/afterdesign/MacTerminal",
             "last_modified": "2013-01-30 19:37",
