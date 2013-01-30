@@ -4,18 +4,15 @@
 
 ---
 
+Some minor (print call) changes and MacTerminal is working with Sublime Text 3 beta !
+
 Thanx to ap0 (https://github.com/ap0) there is default_path to fallback if there is a problem with file path.
-
----
-
----
 
 There is also some interesting information from Thomas Noe 
 about possible issue for people using dropbox for project syncing:
 https://github.com/afterdesign/MacTerminal/issues/6#issuecomment-11831154
 
 ---
-
 
 
 

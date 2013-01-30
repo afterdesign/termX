@@ -49,9 +49,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
             exp_path = os.path.normpath(os.path.expanduser(default_path))
             command.append(exp_path)
         else:
-            print "This may be a bug, please create issue on github"
-
-        print command
+            print("This may be a bug, please create issue on github")
 
         #open terminal
         subprocess.Popen(command)#pylint: disable-msg=E1101
