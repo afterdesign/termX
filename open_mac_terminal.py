@@ -40,7 +40,6 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
 
         #add path
         if paths is not None and len(paths) == 1:
-            print paths
             command.append(paths[0])#pylint: disable-msg=E1101
         elif self.view.file_name() is not None:
             command.append(os.path.dirname(self.view.file_name()))#pylint: disable-msg=E1101
