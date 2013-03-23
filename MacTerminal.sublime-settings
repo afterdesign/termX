@@ -1,3 +1,4 @@
 {
-    "terminal"   :  "terminal"
+    "terminal" : "terminal",
+    "osascript" : "/usr/bin/osascript"
 }

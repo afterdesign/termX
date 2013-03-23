@@ -1,3 +1,6 @@
+# If You like this project - hit it with a star ツ
+
+[MacTerminal](https://github.com/afterdesign/MacTerminal/)
 ---
 
 Default keybinding to "ctrl+cmd+t".
@@ -17,6 +20,7 @@ and add:
     "terminal"   :  "iterm"
 }
 ```
+
 If you wish you can also change it in Settings - Default.
 
 ---
@@ -27,8 +31,8 @@ For now there is no support for multiple selected files in sidebar.
 
 ---
 
-Simple FAQ on main project site. If you have any questions just 
-ping me on [twitter](http://twitter.com/afterdeign) or 
+Simple FAQ on [main project site](https://github.com/afterdesign/MacTerminal).
+If you have any questions just ping me on [twitter](http://twitter.com/afterdeign) or 
 simply write [issue on github](https://github.com/afterdesign/MacTerminal/issues).
 
 ---

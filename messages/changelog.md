@@ -1,5 +1,19 @@
 # If You like this project - hit it with a star ツ
 
+# 23.03.2013
+
+---
+
+Added option to define ``` osascript ``` path because some of you may have problem with PATHs.
+From now by path to ``` osascript ``` it's set to ``` /usr/bin/osascript ``` and can be changed in settings.
+More info in [issue #8](https://github.com/afterdesign/MacTerminal/issues/8).
+
+For more info how to setup ``` osascript ``` path just checkout [README.md](https://github.com/afterdesign/MacTerminal)
+
+Added "Open in terminal" to command palette.
+
+---
+
 # 30.01.2013
 
 ---

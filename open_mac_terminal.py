@@ -30,11 +30,16 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
             return
 
         # set command to run applescript
-        command = ["osascript"]
+        command = []
+
+        # get osascript from settings or just use default value
+        command.append(settings.get("osascript") or "/usr/bin/osascript")
 
         # set path and terminal
-        applescript_path = "%(packages_dir)s/MacTerminal/macterminal_%(terminal_name)s.scpt" % \
-            {"packages_dir" : sublime.packages_path(), "terminal_name" : settings.get("terminal")}
+        applescript_path = "{packages_dir}/MacTerminal/macterminal_{terminal_name}.scpt".format(
+            packages_dir = sublime.packages_path(),
+            terminal_name = settings.get("terminal")
+            )
         
         command.append(applescript_path)
 
