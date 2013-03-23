@@ -15,7 +15,7 @@ on run argv
         if folderName is not missing value then
             if windowsCount is not 0 then
                 tell application "System Events"
-                    keystroke "t" using {command down}
+                    keystroke ("t" as string) using {command down} & return
                 end tell
             end if
 
