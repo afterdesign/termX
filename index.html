@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Macterminal by afterdesign</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Macterminal</h1>
+        <h2></h2>
+
+        <section id="downloads">
+          <a href="https://github.com/afterdesign/MacTerminal/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/afterdesign/MacTerminal/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/afterdesign/MacTerminal" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>Terminal plugin for sublime text</h1>
+
+<ol>
+<li>Fully packaged</li>
+<li>Currently with option to open new tab on OS X (works fine on 10.8)</li>
+<li>Sublime Text 3 beta support</li>
+</ol><h1>How to install ?</h1>
+
+<h3>From git:</h3>
+
+<pre><code>cd $PATH_OF_SUBLIME_PACKAGES
+git clone git://github.com/afterdesign/MacTerminal.git
+</code></pre>
+
+<h3>From <a href="http://wbond.net/sublime_packages/package_control">package control</a>
+</h3>
+
+<p>Just type MacTerminal</p>
+
+<h1>FAQ</h1>
+
+<ol>
+<li>
+<p>How do I use this ?</p>
+
+<p>Just use "ctrl+command+t" while editing file to open terminal with cd to directory where the file exists.</p>
+
+<p>You can also use the "Open in terminal" option in sidebar.</p>
+</li>
+<li>
+<p>How can I change shortcut ?</p>
+
+<p>Go to:</p>
+
+<pre><code>Sublime Text 2 -&gt; Preferences     -&gt; Package Settings -&gt; Macterminal -&gt; Key Bindings - User
+</code></pre>
+
+<p>and add something like:</p>
+
+<pre><code>{ "keys": ["super+t"], "command": "open_mac_terminal" }    
+</code></pre>
+</li>
+<li><p>The "Open in terminal" is greyed out.
+This happens when there is no opened file and for now I don't know if 
+this is just a sublime bug or I need to change something. 
+    For now I saw the same behavior in   </p></li>
+<li>
+<p>How to I use it with iTerm 2 ?
+Simply go to:</p>
+
+<pre><code>Sublime Text 2 -&gt; Preferences -&gt; Package Settings -&gt; Macterminal -&gt; Settings - User
+</code></pre>
+
+<p>and add:</p>
+
+<pre><code>{
+    "terminal"   :  "iterm"
+}
+</code></pre>
+
+<p>If you wish you can also change it in Settings - Default.</p>
+</li>
+<li>
+<p>How do I change path to <code>osascript</code> ?</p>
+
+<p>To check what is path for <code>osascript</code> just open terminal and type:</p>
+
+<pre><code>which osascript
+</code></pre>
+
+<p>With path simply go to:</p>
+
+<pre><code>Sublime Text 2 -&gt; Preferences -&gt; Package Settings -&gt; Macterminal -&gt; Settings - User
+</code></pre>
+
+<p>and add:</p>
+
+<pre><code>{
+    "osascript"   :  "/usr/bin/osascript"
+}
+</code></pre>
+</li>
+<li>
+<p>Its not working for me.</p>
+
+<p>Well then check your python console in sublime (default shortcut is <code>ctrl+`</code>) 
+and you can always ping me on <a href="http://twitter.com/afterdeign">twitter</a> or 
+simply write <a href="https://github.com/afterdesign/MacTerminal/issues">issue on github</a>.</p>
+</li>
+</ol><h1>Contact</h1>
+
+<p>You can follow me on twitter: <a href="http://twitter.com/afterdesign">@afterdesign</a></p>
+
+<h1>License</h1>
+
+<p>Licensed under the <a href="http://opensource.org/licenses/MIT">MIT license</a>.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
