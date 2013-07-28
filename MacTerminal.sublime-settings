@@ -1,4 +1,5 @@
 {
     "terminal" : "terminal",
-    "osascript" : "/usr/bin/osascript"
+    "osascript" : "/usr/bin/osascript",
+    "debug" : false
 }

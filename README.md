@@ -1,3 +1,5 @@
+[![endorse](https://api.coderwall.com/afterdesign/endorsecount.png)](https://coderwall.com/afterdesign)
+
 # Terminal plugin for sublime
 
 1. Fully packaged
@@ -81,14 +83,21 @@ Just type MacTerminal
 
 6. Its not working for me.
 
-    Well then check your python console in sublime (default shortcut is ``` ctrl+` ```) 
-    and you can always ping me on [twitter](http://twitter.com/afterdeign) or 
+    First of all enable ```debug``` mode. To do this open your settings and add:
+    ``` "debug": true ```
+
+    After this try to open terminal again. If it's not working (and debug shouldn't repair the problem) 
+    open sublime console (default shortcut is ``` ctrl+` ```) and open new issue with log 
+    between "---MacTerminal Debug Start---" and "---MacTerminal Debug End---".
+
+    You can always ping me on [twitter](http://twitter.com/afterdeign) or 
     simply write [issue on github](https://github.com/afterdesign/MacTerminal/issues).
-    
 
 # Contact
 
 You can follow me on twitter: [@afterdesign](http://twitter.com/afterdesign)
+or find me on coderwall: [@afterdesign](http://coderwall.com/afterdesign)
+or find me on g+: [@117103637919115489068](https://plus.google.com/117103637919115489068/posts) (those sexy g+ urls)
 
 # License
 

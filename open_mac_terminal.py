@@ -7,6 +7,7 @@ import sublime_plugin
 import os
 import sublime
 import subprocess
+from pprint import pprint
 
 class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W0232
     '''
@@ -25,7 +26,8 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
         settings = sublime.load_settings('MacTerminal.sublime-settings')
         terminal_name = settings.get("terminal")
         default_path = settings.get("default-path")
-        
+        debug = settings.get("debug")
+
         if len(terminal_name) == 0:
             return
 
@@ -40,7 +42,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
             packages_dir = sublime.packages_path(),
             terminal_name = settings.get("terminal")
             )
-        
+
         command.append(applescript_path)
 
         #add path
@@ -57,4 +59,21 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
             print("This may be a bug, please create issue on github")
 
         #open terminal
-        subprocess.Popen(command)#pylint: disable-msg=E1101
+        if debug:
+            debug_info = {}
+            debug_info['cmd'] = ''.join(command)
+            proc = subprocess.Popen(command,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            startupinfo=None)
+
+            (out, err) = proc.communicate()
+            debug_info['out'] = out
+            debug_info['err'] = err
+            debug_info['terminal_name'] = terminal_name
+            debug_info['default_path'] = default_path
+            print "---MacTerminal DEBUG START---"
+            pprint(debug_info)
+            print "---MacTerminal DEBUG END---"
+        else:
+            subprocess.Popen(command)#pylint: disable-msg=E1101
