@@ -1,56 +1,60 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Macterminal : " />
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-    <title>Macterminal</title>
+    <title>Macterminal by afterdesign</title>
   </head>
 
   <body>
+    <header>
+      <div class="inner">
+        <h1>Macterminal</h1>
+        <h2></h2>
+        <a href="https://github.com/afterdesign/MacTerminal" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/afterdesign/MacTerminal">View on GitHub</a>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <p><a href="https://coderwall.com/afterdesign"><img src="https://api.coderwall.com/afterdesign/endorsecount.png" alt="endorse"></a></p>
 
-          <h1 id="project_title">Macterminal</h1>
-          <h2 id="project_tagline"></h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/afterdesign/MacTerminal/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/afterdesign/MacTerminal/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>Terminal plugin for sublime text</h1>
+<h1>
+<a name="terminal-plugin-for-sublime" class="anchor" href="#terminal-plugin-for-sublime"><span class="octicon octicon-link"></span></a>Terminal plugin for sublime</h1>
 
 <ol>
 <li>Fully packaged</li>
 <li>Currently with option to open new tab on OS X (works fine on 10.8)</li>
 <li>Sublime Text 3 beta support</li>
-</ol><h1>How to install ?</h1>
+</ol><h1>
+<a name="how-to-install-" class="anchor" href="#how-to-install-"><span class="octicon octicon-link"></span></a>How to install ?</h1>
 
-<h3>From git:</h3>
+<h3>
+<a name="from-git" class="anchor" href="#from-git"><span class="octicon octicon-link"></span></a>From git:</h3>
 
 <pre><code>cd $PATH_OF_SUBLIME_PACKAGES
 git clone git://github.com/afterdesign/MacTerminal.git
 </code></pre>
 
-<h3>From <a href="http://wbond.net/sublime_packages/package_control">package control</a>
+<h3>
+<a name="from-package-control" class="anchor" href="#from-package-control"><span class="octicon octicon-link"></span></a>From <a href="http://wbond.net/sublime_packages/package_control">package control</a>
 </h3>
 
 <p>Just type MacTerminal</p>
 
-<h1>FAQ</h1>
+<h1>
+<a name="faq" class="anchor" href="#faq"><span class="octicon octicon-link"></span></a>FAQ</h1>
 
 <ol>
 <li>
@@ -116,29 +120,46 @@ Simply go to:</p>
 <li>
 <p>Its not working for me.</p>
 
-<p>Well then check your python console in sublime (default shortcut is <code>ctrl+`</code>) 
-and you can always ping me on <a href="http://twitter.com/afterdeign">twitter</a> or 
+<p>First of all enable <code>debug</code> mode. To do this open your settings and add:
+<code>"debug": true</code></p>
+
+<p>After this try to open terminal again. If it's not working (and debug shouldn't repair the problem) 
+open sublime console (default shortcut is <code>ctrl+`</code>) and open new issue with log 
+between "---MacTerminal Debug Start---" and "---MacTerminal Debug End---".</p>
+
+<p>You can always ping me on <a href="http://twitter.com/afterdeign">twitter</a> or 
 simply write <a href="https://github.com/afterdesign/MacTerminal/issues">issue on github</a>.</p>
 </li>
-</ol><h1>Contact</h1>
+</ol><h1>
+<a name="contact" class="anchor" href="#contact"><span class="octicon octicon-link"></span></a>Contact</h1>
 
-<p>You can follow me on twitter: <a href="http://twitter.com/afterdesign">@afterdesign</a></p>
+<p>You can follow me on twitter: <a href="http://twitter.com/afterdesign">@afterdesign</a>
+or find me on coderwall: <a href="http://coderwall.com/afterdesign">@afterdesign</a>
+or find me on g+: <a href="https://plus.google.com/117103637919115489068/posts">@117103637919115489068</a> (those sexy g+ urls)</p>
 
-<h1>License</h1>
+<h1>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h1>
 
 <p>Licensed under the <a href="http://opensource.org/licenses/MIT">MIT license</a>.</p>
-      </section>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/afterdesign/MacTerminal/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/afterdesign/MacTerminal/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/afterdesign/MacTerminal"></a> is maintained by <a href="https://github.com/afterdesign">afterdesign</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Macterminal maintained by <a href="https://github.com/afterdesign">afterdesign</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
+  
   </body>
 </html>
