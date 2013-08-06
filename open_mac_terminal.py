@@ -72,8 +72,8 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
             debug_info['err'] = err
             debug_info['terminal_name'] = terminal_name
             debug_info['default_path'] = default_path
-            print "---MacTerminal DEBUG START---"
+            print("---MacTerminal DEBUG START---")
             pprint(debug_info)
-            print "---MacTerminal DEBUG END---"
+            print("---MacTerminal DEBUG END---")
         else:
             subprocess.Popen(command)#pylint: disable-msg=E1101
