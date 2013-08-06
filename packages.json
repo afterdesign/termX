@@ -6,12 +6,12 @@
             "description": "Open terminal/iterm 2 on current file folder (new tab and ST2/ST3 support)",
             "author": "Rafał 'afterdesign' Malinowski",
             "homepage": "https://github.com/afterdesign/MacTerminal",
-            "last_modified": "2013-07-28 13:49",
+            "last_modified": "2013-08-06 23:16",
             "platforms": {
                 "osx": [
                     {
-                        "version": "1.4.0",
-                        "url": "https://codeload.github.com/afterdesign/MacTerminal/zip/1.4.0"
+                        "version": "1.4.1",
+                        "url": "https://codeload.github.com/afterdesign/MacTerminal/zip/1.4.1"
                     }
                 ]
             }
