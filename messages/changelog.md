@@ -1,5 +1,18 @@
 # If You like this project - hit it with a star ツ
 
+# 10.08.2013 version 1.4.2
+
+---
+
+1. Resolved issue with going to path when plugin is used from "Open in terminal" menu.
+2. Updated package to new package manager schema.
+
+# 06.07.2013 version 1.4.1
+
+---
+
+1. Resolved issue #13 - problems with print function in sublime text 3
+
 # 28.07.2013 version 1.4
 
 ---
