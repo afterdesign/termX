@@ -44,7 +44,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
             )
 
         command.append(applescript_path)
-        print "test"
+
         #add path
         if paths is not None and len(paths) == 1:
             command.append(os.path.dirname(paths[0]))#pylint: disable-msg=E1101
