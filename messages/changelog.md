@@ -1,5 +1,12 @@
 # If You like this project - hit it with a star ツ
 
+# 10.10.2013 version 1.4.7
+
+---
+
+1. Resolved issue with ST3 by adding .no-sublime-package to download whole package not just create .sublime-package
+
+
 # 10.08.2013 version 1.4.2
 
 ---
@@ -54,7 +61,7 @@ Some minor (print call) changes and MacTerminal is working with Sublime Text 3 b
 
 Thanx to ap0 (https://github.com/ap0) there is default_path to fallback if there is a problem with file path.
 
-There is also some interesting information from Thomas Noe 
+There is also some interesting information from Thomas Noe
 about possible issue for people using dropbox for project syncing:
 https://github.com/afterdesign/MacTerminal/issues/6#issuecomment-11831154
 
@@ -66,13 +73,13 @@ https://github.com/afterdesign/MacTerminal/issues/6#issuecomment-11831154
 
 ---
 
-Changed default keybinding to "ctrl+cmd+t" due to global bindings problems 
+Changed default keybinding to "ctrl+cmd+t" due to global bindings problems
 explained in [issue 5](https://github.com/afterdesign/MacTerminal/issues/5)
 
 ---
 
 Added support for iTerm 2. Just go to:
-    
+
 ```
 Sublime Text 2 -> Preferences -> Package Settings -> Macterminal -> Settings - User
 ```
@@ -88,14 +95,14 @@ If you wish you can also change it in Settings - Default.
 
 ---
 
-Added full support for opening terminal from sidebar. 
+Added full support for opening terminal from sidebar.
 Just right click on file or directory and use "Open in terminal".
 For now there is no support for multiple selected files in sidebar.
 
 ---
 
-Added simple FAQ on main project site. If you have any questions just 
-ping me on [twitter](http://twitter.com/afterdeign) or 
+Added simple FAQ on main project site. If you have any questions just
+ping me on [twitter](http://twitter.com/afterdeign) or
 simply write [issue on github](https://github.com/afterdesign/MacTerminal/issues).
 
 ---
