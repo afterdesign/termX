@@ -7,9 +7,9 @@ on run argv
     tell application "iTerm"
         activate
 
-        make new terminal
+        set _term to (make new terminal)
 
-        tell the first terminal
+        tell _term
             launch session "Default Session"
             set _session to current session
         end tell
