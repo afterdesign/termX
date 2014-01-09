@@ -7,12 +7,11 @@
             "author": "Rafał 'afterdesign' Malinowski",
             "homepage": "https://github.com/afterdesign/MacTerminal",
             "labels": ["terminal"],
-            "readme": "https://raw.github.com/afterdesign/MacTerminal/master/README.md",
             "releases" : [
                 {
+                    "sublime_text": "*",
                     "platforms": ["osx", "osx-x64"],
-                    "details": "https://github.com/afterdesign/MacTerminal/tags",
-                    "date": "2013-11-28 20:49:00"
+                    "details": "https://github.com/afterdesign/MacTerminal/tags"
                 }
             ]
         }
