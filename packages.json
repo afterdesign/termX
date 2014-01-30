@@ -7,6 +7,7 @@
             "author": "Rafał 'afterdesign' Malinowski",
             "homepage": "https://github.com/afterdesign/MacTerminal",
             "labels": ["terminal"],
+            "readme": "https://raw.github.com/afterdesign/MacTerminal/master/README.md",
             "releases" : [
                 {
                     "sublime_text": "*",

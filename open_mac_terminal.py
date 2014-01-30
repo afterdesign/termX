@@ -3,21 +3,21 @@
 Sublime text plugin that opens terminal.
 '''
 
-import sublime_plugin
+import sublime_plugin#pylint: disable-msg=F0401
 import os
-import sublime
+import sublime#pylint: disable-msg=F0401
 import subprocess
 from pprint import pprint
 
 class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W0232
     '''
-    Class is opening new terminal window with the path of current file  
+    Class is opening new terminal window with the path of current file
     '''
 
     def run(self, edit, paths = None):#pylint: disable-msg=W0613
         '''
         Sublime text run
-        
+
         @param edit: sublime.Edit
         @param paths: paths from sidebar
         '''
@@ -48,11 +48,11 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
         #add path
         if paths is not None and len(paths) == 1:
             command.append(os.path.dirname(paths[0]))#pylint: disable-msg=E1101
-        elif self.view.file_name() is not None:
+        elif self.view.file_name() is not None:#pylint: disable-msg=E1101
             command.append(os.path.dirname(self.view.file_name()))#pylint: disable-msg=E1101
-        elif self.view.window().active_view().file_name() is not None:
+        elif self.view.window().active_view().file_name() is not None:#pylint: disable-msg=E1101
             command.append(os.path.dirname(self.view.window().active_view().file_name()))#pylint: disable-msg=E1101
-        elif len(default_path) > 0:
+        elif default_path is not None and len(default_path) > 0:
             exp_path = os.path.normpath(os.path.expanduser(default_path))
             command.append(exp_path)
         else:
