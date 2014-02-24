@@ -7,13 +7,17 @@ on run argv
     tell application "iTerm"
         activate
 
-        set _term to (make new terminal)
+        if (count of terminals) = 0 then
+            set _term to (make new terminal)
+        else
+            set _term to current terminal
+        end if
 
         tell _term
             launch session "Default Session"
             set _session to current session
         end tell
-        
+
         if folderName is not missing value then
             tell _session
                 write text "cd \"" & folderName & "\""
