@@ -8,6 +8,7 @@ Default keybinding to "ctrl+cmd+t".
 ---
 
 Added support to open only project directories.
+This gif shows how it works: ![](https://raw.github.com/afterdesign/MacTerminal/master/messages/macterminal_2.gif)
 
 Open:
 ```
