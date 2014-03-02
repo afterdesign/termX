@@ -1,5 +1,6 @@
 {
     "terminal" : "terminal",
     "osascript" : "/usr/bin/osascript",
-    "debug" : false
+    "debug" : false,
+    "directory_mode" : "default"
 }
