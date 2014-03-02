@@ -110,7 +110,7 @@ Just type MacTerminal
 
     After this try to open terminal again. If it's not working (and debug shouldn't repair the problem)
     open sublime console (default shortcut is ``` ctrl+` ```) and open new issue with log
-    between "---MacTerminal Debug Start---" and "---MacTerminal Debug End---".
+    between ```---MacTerminal Debug Start---``` and ```---MacTerminal Debug End---```.
 
     You can always ping me on [twitter](http://twitter.com/afterdeign) or
     simply write [issue on github](https://github.com/afterdesign/MacTerminal/issues).
