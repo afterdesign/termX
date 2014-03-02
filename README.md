@@ -119,7 +119,7 @@ Just type MacTerminal
 
 You can follow me on twitter: [@afterdesign](http://twitter.com/afterdesign)
 or find me on coderwall: [@afterdesign](http://coderwall.com/afterdesign)
-or find me on g+: [++RafałMalinowski](https://plus.google.com/+RafałMalinowski)
+or find me on g+: [+RafałMalinowski](https://plus.google.com/+RafałMalinowski)
 
 # License
 
