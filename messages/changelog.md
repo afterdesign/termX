@@ -1,11 +1,15 @@
 # If You like this project - hit it with a star ツ
 
+# 26.04.2014 version 2.0.1
+
+1. Merged PR #25 - fix applescript error when Terminal is runing and window count is 0
+
+---
+
 # 02.03.2014 version 2.0.0
 
 1. Added option to open highest directories in project with quick panel.
 2. Refactoring.
-
-# 02.03.2014 version 1.4.10
 
 ---
 
