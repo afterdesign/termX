@@ -37,7 +37,8 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
 
         if directory_mode == "project":
             path = self.get_first_project_directory()
-        else:
+        
+        if directory_mode != "project" or path == None:
             path = self.get_current_path(paths)
 
         run_command(path)
