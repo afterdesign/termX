@@ -1,26 +1,25 @@
 on run argv
-    -- Don't set if no path to use
     if count of argv is 1 then
-        set folderName to item 1 of argv -- Folder path
+        set folderName to item 1 of argv
     end if
-    
-    if folderName is not missing value then
-        tell application "Terminal"
+
+    if folderName is missing value then
+        return
+    end if
+
+    tell application "Terminal"
+        if not frontmost then
             activate
+            delay (1)
+        end if
 
-            delay 0.25
-            tell application "System Events" to keystroke "t" using command down
-            delay 0.5
-
-            set windowsCount to (count of windows)
-            
-            if windowsCount is not 0 then
-                set window_id to id of first window whose frontmost is true
-                set commandToRun to "cd " & quoted form of (folderName as string)
-
-                do script commandToRun in window id window_id of application "Terminal"
-                do script "clear" in window id window_id of application "Terminal"
-            end if
+        tell application "System Events"
+            keystroke "t" using command down
         end tell
-    end if
+
+        set commandToRun to "cd " & (folderName as string)
+        set current_tab to selected tab of first window whose frontmost is true
+        do script commandToRun in current_tab
+        do script "clear" in current_tab
+    end tell
 end run
