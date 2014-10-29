@@ -8,6 +8,7 @@ import sublime_plugin
 import os
 import sublime
 import subprocess
+import pipes
 from pprint import pprint
 
 PROJECT_FOLDERS = []
@@ -37,7 +38,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
 
         if directory_mode == "project":
             path = self.get_first_project_directory()
-        
+
         if directory_mode != "project" or path == None:
             path = self.get_current_path(paths)
 
@@ -102,6 +103,8 @@ def run_command(path):
     if path is None or len(path) == 0:
         return
         # raise Exception("This may be a bug, please enable debug mode and create issue on github")
+
+    path = pipes.quote(path)
 
     settings = sublime.load_settings('MacTerminal.sublime-settings')
     debug_settings = settings.get("debug")

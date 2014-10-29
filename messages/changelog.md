@@ -1,5 +1,22 @@
 # If You like this project - hit it with a star ツ
 
+# 29.10.2014 version 3.0.1
+
+1. Add path quoting in python
+
+---
+
+# 26.10.2014 version 3.0.0
+
+1. Complete rewrite of applescript to open terminals
+2. In Yosemite macterminal is using javascript automation instead of applescript
+3. Merged PR #30 - ixes behavior of no action when configured with directory_mode = project and sublime has not a project open
+
+There still needs to be 1 second delay between activating the terminal and pushing command+t to open new tab
+so please be patient. Remember also that if you switch windows when macterminal is working then it's going to fail.
+
+---
+
 # 26.04.2014 version 2.0.1
 
 1. Merged PR #25 - fix applescript error when Terminal is runing and window count is 0
