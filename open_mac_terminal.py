@@ -8,6 +8,8 @@ import sublime_plugin
 import os
 import sublime
 import subprocess
+import pipes
+import platform
 from pprint import pprint
 
 PROJECT_FOLDERS = []
@@ -37,7 +39,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W02
 
         if directory_mode == "project":
             path = self.get_first_project_directory()
-        
+
         if directory_mode != "project" or path == None:
             path = self.get_current_path(paths)
 
@@ -103,6 +105,8 @@ def run_command(path):
         return
         # raise Exception("This may be a bug, please enable debug mode and create issue on github")
 
+    path = pipes.quote(path)
+
     settings = sublime.load_settings('MacTerminal.sublime-settings')
     debug_settings = settings.get("debug")
     terminal_name = settings.get("terminal")
@@ -114,10 +118,16 @@ def run_command(path):
     # get osascript from settings or just use default value
     command.append(settings.get("osascript") or "/usr/bin/osascript")
 
+    if '10.10' in platform.mac_ver()[0]:
+        ext_language = 'js'
+    else:
+        ext_language = 'scpt'
+
     # set path and terminal
-    applescript_path = "{packages_dir}/MacTerminal/macterminal_{terminal_name}.scpt".format(
-        packages_dir = sublime.packages_path(),
-        terminal_name = settings.get("terminal")
+    applescript_path = "{packages_dir}/MacTerminal/macterminal_{terminal_name}.{ext}".format(
+        packages_dir=sublime.packages_path(),
+        terminal_name=settings.get("terminal"),
+        ext=ext_language
     )
 
     command.append(applescript_path)
