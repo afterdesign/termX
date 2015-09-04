@@ -4,7 +4,7 @@
         {
             "name": "MacTerminal",
             "description": "Open terminal/iterm 2 on current file folder (new tab and ST2/ST3 support)",
-            "author": "Rafał 'afterd.esign' Malinowski",
+            "author": "Rafał 'afterdesign' Malinowski",
             "homepage": "https://afterdesign.github.io/MacTerminal",
             "labels": ["terminal"],
             "readme": "https://raw.github.com/afterdesign/MacTerminal/master/README.md",
