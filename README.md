@@ -41,7 +41,7 @@ Just type MacTerminal
     this is just a sublime bug or I need to change something.
         For now I saw the same behavior in
 
-4. How to I use it with iTerm 2 ?
+4. How to I use it with iTerm 2 (and beta/nightly builds with ``` iterm-nightly ```) ?
     Simply go to:
 
     ```

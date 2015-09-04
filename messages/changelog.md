@@ -1,5 +1,11 @@
 # If You like this project - hit it with a star ツ
 
+# 04.09.2015 version 4.0.0
+1. Another rewrite
+2. Add iTerm2 beta/nightly support (set iterm-nightly as terminal in settings)
+   Thanks to https://github.com/Codelica and https://github.com/thearrow !
+3. Bugfixes
+
 # 29.10.2014 version 3.0.1
 
 1. Add path quoting in python

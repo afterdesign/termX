@@ -24,7 +24,7 @@ And set :
 
 ---
 
-Added support for iTerm 2. Just go to:
+Added support for iTerm 2 (and beta/nightly builds with ``` iterm-nightly ```). Just go to:
 
 ```
 Sublime Text 2 -> Preferences -> Package Settings -> Macterminal -> Settings - User
