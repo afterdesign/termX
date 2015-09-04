@@ -111,6 +111,11 @@ class OpenMacTerminal(sublime_plugin.TextCommand):
         self.paths = paths_picker.fetch_paths()
         self.open_terminal()
 
+        self.debug_info['directory_mode'] = directory_mode
+        self.debug_info['paths'] = self.paths
+
+        debug(self.debug_info, self.settings.get('debug', False))
+
     def open_terminal(self):
         '''
         Choose what to open - terminal with current path or quick selection window
@@ -119,7 +124,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):
             return False
 
         if len(self.paths) == 1:
-            self.open_terminal_command(self.paths.pop())
+            self.open_terminal_command(self.paths[0])
             return True
 
         self.show_directory_selection()
@@ -156,7 +161,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):
         command.append(self.settings.get('osascript', '/usr/bin/osascript'))
 
         if '10.10' in platform.mac_ver()[0]:
-            ext_language = 'scpt'
+            ext_language = 'js'
         else:
             ext_language = 'scpt'
 
@@ -168,29 +173,24 @@ class OpenMacTerminal(sublime_plugin.TextCommand):
         )
 
         command.append(applescript_path)
-
         command.append(quoted_path)
-
-        self.debug_info['cmd'] = ' '.join(command)
 
         #open terminal
         proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, startupinfo=None)
         (out, err) = proc.communicate()
 
+        self.debug_info['ext_language'] = ext_language
+        self.debug_info['cmd'] = ' '.join(command)
         self.debug_info['process_out'] = out
-        self.debug_info['process_out'] = err
+        self.debug_info['process_err'] = err
 
+def debug(debug_info, debug_mode):
+    '''
+    show some debug stuff when needed
+    '''
+    if not debug_mode:
+        return False
 
-# def debug(process, command, terminal_name, directory_mode):
-#     '''
-#     show some debug stuff when needed
-#     '''
-#     debug_info = {}
-#     debug_info['cmd'] = ''.join(command)
-#     debug_info['out'] = process['out']
-#     debug_info['err'] = process['err']
-#     debug_info['terminal_name'] = terminal_name
-#     debug_info['directory_mode'] = directory_mode
-#     print("---MacTerminal DEBUG START---")
-#     pprint(debug_info)
-#     print("---MacTerminal DEBUG END---")
+    pprint("---MacTerminal DEBUG START---")
+    pprint(debug_info)
+    pprint("---MacTerminal DEBUG END---")
