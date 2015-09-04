@@ -20,7 +20,7 @@ function run(argv) {
     );
 
     var gotoDirectory = 'cd ' + argv.join(' ');
-    var currentTerminalSession = Terminal.currentTerminal().currentSession();
+    var currentTerminalSession = Terminal.currentWindow.currentSession;
     currentTerminalSession.write({text: gotoDirectory});
     currentTerminalSession.write({text: 'clear'});
 }
