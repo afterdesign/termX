@@ -2,8 +2,7 @@
 
 function run(argv) {
 
-    if (argv.length == 0) {
-        console.log("missing path");
+    if (argv.length === 0) {
         return;
     }
 
