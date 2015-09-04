@@ -1,170 +1,196 @@
 # -*- coding: utf-8 -*-
-#pylint: disable-msg=E1101, F0401
 '''
 Sublime text plugin that opens terminal.
 '''
 
-import sublime_plugin
 import os
-import sublime
-import subprocess
 import pipes
+import sublime
 import platform
+import subprocess
+import sublime_plugin
 from pprint import pprint
 
-PROJECT_FOLDERS = []
+class PathPicker(object):
+    '''
+    Class to manage paths for files
+    '''
 
-class OpenMacTerminal(sublime_plugin.TextCommand):#pylint: disable-msg=R0903,W0232
+    def __init__(self, view, selected_paths, directory_mode):
+        self.view = view
+        self.selected_paths = selected_paths
+        self.directory_mode = directory_mode
+
+    def fetch_paths(self):
+        """
+        Get list of paths
+        """
+        paths = self.get_paths_for_selected_items()
+        paths = self.get_project_paths(paths)
+        paths = self.get_path_for_currently_open_file(paths)
+
+        return list(set(paths))
+
+    def get_paths_for_selected_items(self):
+        '''
+        Get paths for selected items in sidebar.
+        '''
+
+        paths_to_choose = []
+        for single_path in self.selected_paths:
+            if os.path.isdir(single_path):
+                paths_to_choose.append(single_path)
+            else:
+                paths_to_choose.append(os.path.dirname(single_path))
+
+        return paths_to_choose
+
+    def get_project_paths(self, paths):
+        '''
+        Get all root directories for project.
+        '''
+
+        if len(paths) > 0:
+            return paths
+
+        if self.directory_mode != 'project':
+            return paths
+
+        paths = paths + self.view.window().folders()
+
+        return paths
+
+    def get_path_for_currently_open_file(self, paths): # pylint: disable=invalid-name
+        '''
+        Get paths for currently open tab in sublime
+        '''
+        if len(paths) > 0:
+            return paths
+
+        if self.directory_mode != 'file':
+            return paths
+
+        if self.view.file_name() is not None:
+            paths.append(os.path.dirname(self.view.file_name()))
+
+        elif self.view.window().active_view().file_name() is not None:
+            paths.append(os.path.dirname(self.view.window().active_view().file_name()))
+
+        else:
+            paths = paths + self.view.window().folders()
+
+        return paths
+
+class OpenMacTerminal(sublime_plugin.TextCommand):
     '''
     Class is opening new terminal window with the path of current file
     '''
 
-    def run(self, edit, paths = None):#pylint: disable-msg=W0613
+    def __init__(self, *args, **kwargs):
+        sublime_plugin.TextCommand.__init__(self, *args, **kwargs)
+
+        self.settings = sublime.load_settings('MacTerminal.sublime-settings')
+        self.paths = []
+        self.debug_info = {}
+
+    def run(self, *dummy, **kwargs):
         '''
-        Sublime text run
-
-        @param edit: sublime.Edit
-        @param paths: paths from sidebar
-        '''
-        #clear directories list
-        del PROJECT_FOLDERS[:]
-
-        #get settings
-        settings = sublime.load_settings('MacTerminal.sublime-settings')
-        terminal_name = settings.get("terminal")
-        directory_mode = settings.get("directory_mode") or "default"
-
-        if len(terminal_name) == 0:
-            return
-
-        if directory_mode == "project":
-            path = self.get_first_project_directory()
-
-        if directory_mode != "project" or path == None:
-            path = self.get_current_path(paths)
-
-        run_command(path)
-
-    def get_first_project_directory(self):
-        '''
-        Open first directory on list of folders in sidebar.
-        '''
-        if len(self.view.window().folders()) == 1:
-            return self.view.window().folders()[0]
-
-        elif len(self.view.window().folders()) > 1:
-            for folder in self.view.window().folders():
-                PROJECT_FOLDERS.append(folder)
-
-            self.view.window().show_quick_panel(
-                PROJECT_FOLDERS,
-                run_with_selected_direcotory,
-                sublime.MONOSPACE_FONT
-            )
-            return None
-
-        else:
-            return None
-
-    def get_current_path(self, paths):
-        '''
-        Get path to directory selected from sidebar or directory of selected file.
+        This method is invoked by sublime
         '''
 
-        if paths is not None and len(paths) == 1:
-            path = os.path.dirname(paths[0])
+        selected_paths = kwargs.get('paths', [])
 
-        elif self.view.file_name() is not None:
-            path = os.path.dirname(self.view.file_name())
+        # get settings
+        directory_mode = self.settings.get('directory_mode', 'file')
 
-        elif self.view.window().active_view().file_name() is not None:
-            path = os.path.dirname(self.view.window().active_view().file_name())
+        # temporary hack for old configurations
+        if directory_mode not in ('project', 'file'):
+            directory_mode = 'file'
 
-        elif len(self.view.window().folders()) > 0:
-            return self.get_first_project_directory()
+        paths_picker = PathPicker(self.view, selected_paths, directory_mode) # pylint: disable=no-member
+        self.paths = paths_picker.fetch_paths()
+        self.open_terminal()
 
-        else:
-            raise Exception("This may be a bug, please enable debug mode and create issue on github")
+    def open_terminal(self):
+        '''
+        Choose what to open - terminal with current path or quick selection window
+        '''
+        if len(self.paths) == 0:
+            return False
 
-        return path
+        if len(self.paths) == 1:
+            self.open_terminal_command(self.paths.pop())
+            return True
 
-def run_with_selected_direcotory(index):
-    '''
-    Open directory selected in quickpanel
-    '''
-    if index == -1:
-        return
+        self.show_directory_selection()
 
-    run_command(PROJECT_FOLDERS[index])
+    def show_directory_selection(self):
+        '''
+        Open quick selection window with paths
+        '''
 
-def run_command(path):
-    '''
-    Open terminal in selected directory
-    '''
-    if path is None or len(path) == 0:
-        return
-        # raise Exception("This may be a bug, please enable debug mode and create issue on github")
-
-    path = pipes.quote(path)
-
-    settings = sublime.load_settings('MacTerminal.sublime-settings')
-    debug_settings = settings.get("debug")
-    terminal_name = settings.get("terminal")
-    directory_mode = settings.get("directory_mode") or "default"
-
-    # set command to run applescript
-    command = []
-
-    # get osascript from settings or just use default value
-    command.append(settings.get("osascript") or "/usr/bin/osascript")
-
-    if '10.10' in platform.mac_ver()[0]:
-        ext_language = 'js'
-    else:
-        ext_language = 'scpt'
-
-    # set path and terminal
-    applescript_path = "{packages_dir}/MacTerminal/macterminal_{terminal_name}.{ext}".format(
-        packages_dir=sublime.packages_path(),
-        terminal_name=settings.get("terminal"),
-        ext=ext_language
-    )
-
-    command.append(applescript_path)
-
-    command.append(path)
-
-    #open terminal
-    if debug_settings:
-        proc = subprocess.Popen(command,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            startupinfo=None
+        self.view.window().show_quick_panel( # pylint: disable=no-member
+            self.paths,
+            self.open_selected_direcotory,
+            sublime.MONOSPACE_FONT
         )
+
+    def open_selected_direcotory(self, selected_index):
+        '''
+        This method is invoked by sublime quick panel
+        '''
+        if selected_index == -1:
+            return False
+
+        self.open_terminal_command(self.paths[selected_index])
+
+    def open_terminal_command(self, path):
+        '''
+        Open terminal with javascript/applescript
+        '''
+
+        quoted_path = pipes.quote(path)
+        command = []
+
+        # get osascript from settings or just use default value
+        command.append(self.settings.get('osascript', '/usr/bin/osascript'))
+
+        if '10.10' in platform.mac_ver()[0]:
+            ext_language = 'scpt'
+        else:
+            ext_language = 'scpt'
+
+        # set path and terminal
+        applescript_path = '{packages_dir}/MacTerminal/macterminal_{terminal_name}.{ext}'.format(
+            packages_dir=sublime.packages_path(),
+            terminal_name=self.settings.get('terminal', 'terminal'),
+            ext=ext_language
+        )
+
+        command.append(applescript_path)
+
+        command.append(quoted_path)
+
+        self.debug_info['cmd'] = ' '.join(command)
+
+        #open terminal
+        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, startupinfo=None)
         (out, err) = proc.communicate()
 
-        debug(
-            {
-                'out':out,
-                'err':err
-            },
-            command,
-            terminal_name,
-            directory_mode
-        )
-    else:
-        subprocess.Popen(command)
+        self.debug_info['process_out'] = out
+        self.debug_info['process_out'] = err
 
-def debug(process, command, terminal_name, directory_mode):
-    '''
-    show some debug stuff when needed
-    '''
-    debug_info = {}
-    debug_info['cmd'] = ''.join(command)
-    debug_info['out'] = process['out']
-    debug_info['err'] = process['err']
-    debug_info['terminal_name'] = terminal_name
-    debug_info['directory_mode'] = directory_mode
-    print("---MacTerminal DEBUG START---")
-    pprint(debug_info)
-    print("---MacTerminal DEBUG END---")
+
+# def debug(process, command, terminal_name, directory_mode):
+#     '''
+#     show some debug stuff when needed
+#     '''
+#     debug_info = {}
+#     debug_info['cmd'] = ''.join(command)
+#     debug_info['out'] = process['out']
+#     debug_info['err'] = process['err']
+#     debug_info['terminal_name'] = terminal_name
+#     debug_info['directory_mode'] = directory_mode
+#     print("---MacTerminal DEBUG START---")
+#     pprint(debug_info)
+#     print("---MacTerminal DEBUG END---")
