@@ -161,7 +161,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):
         # get osascript from settings or just use default value
         command.append(self.settings.get('osascript', '/usr/bin/osascript'))
 
-        if Decimal(platform.mac_ver()[0]) >= Decimal('10.10'):
+        if Decimal(".".join(platform.mac_ver()[0].split(".")[:2])) >= Decimal('10.10'):
             ext_language = 'js'
         else:
             ext_language = 'scpt'
