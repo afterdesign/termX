@@ -52,7 +52,7 @@ Just type MacTerminal
 
     ```
     {
-        "terminal"   :  "iterm"
+        "terminal"   :  "iterm", // to use beta/nightly builds set to "iterm-nightly"
     }
     ```
 
