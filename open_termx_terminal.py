@@ -104,10 +104,6 @@ class OpenMacTerminal(sublime_plugin.TextCommand):
         # get settings
         directory_mode = self.settings.get('directory_mode', 'file')
 
-        # temporary hack for old configurations
-        if directory_mode not in ('project', 'file'):
-            directory_mode = 'file'
-
         paths_picker = PathPicker(self.view, selected_paths, directory_mode) # pylint: disable=no-member
         self.paths = paths_picker.fetch_paths()
         self.open_terminal()
@@ -167,7 +163,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):
             ext_language = 'scpt'
 
         # set path and terminal
-        applescript_path = '{packages_dir}/MacTerminal/macterminal_{terminal_name}.{ext}'.format(
+        applescript_path = '{packages_dir}/termX/termx_{terminal_name}.{ext}'.format(
             packages_dir=sublime.packages_path(),
             terminal_name=self.settings.get('terminal', 'terminal'),
             ext=ext_language

@@ -1,6 +1,6 @@
 [
   {
     "caption": "Open in terminal",
-    "command": "open_mac_terminal"
+    "command": "open_termx_terminal"
   }
 ]

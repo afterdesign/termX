@@ -1,9 +1,9 @@
 [
     {"caption":"-", "id":"side-bar-terminal-separator"},
     {
-        "caption": "Open in terminal", 
-        "id": "side-bar-new-terminal", 
-        "command": "open_mac_terminal",
+        "caption": "Open in terminal",
+        "id": "side-bar-new-terminal",
+        "command": "open_termx_terminal",
         "args" : {
             "paths" : []
         }

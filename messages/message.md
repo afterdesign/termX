@@ -1,55 +1,58 @@
 # If You like this project - hit it with a star ツ
 
-[MacTerminal](https://github.com/afterdesign/MacTerminal/)
----
-
-Default keybinding to "ctrl+cmd+t".
+Default keybinding is "ctrl+cmd+t" !
 
 ---
 
-Added support to open only project directories.
-This gif shows how it works: ![](https://raw.github.com/afterdesign/MacTerminal/master/messages/macterminal_2.gif)
+SETTINGS:
 
-Open:
-```
-Sublime Text 2 -> Preferences -> Package Settings -> Macterminal -> Settings - User
-```
+    Sublime Text 2 -> Preferences -> Package Settings -> termX ->
 
-And set :
-```
-{
-    "directory_mode" : "project"
-}
-```
+OPTIONS:
 
----
+    {
+        "terminal" : "terminal/iterm",
+        "osascript" : "/usr/bin/osascript",
+        "debug" : false/true,
+        "directory_mode" : "file/project"
+    }
 
-Added support for iTerm 2 (and beta/nightly builds with ``` iterm-nightly ```). Just go to:
-
-```
-Sublime Text 2 -> Preferences -> Package Settings -> Macterminal -> Settings - User
-```
-
-and add:
-
-```
-{
-    "terminal"   :  "iterm"
-}
-```
-
-If you wish you can also change it in Settings - Default.
 
 ---
 
-Full support for opening terminal from sidebar.
-Just right click on file or directory and use "Open in terminal".
-For now there is no support for multiple selected files in sidebar.
+directory_mode: "file"
+
+    DEFAULT
+    open path with currently opened file/currently chosen file in sidebar
+
+directory_mode: "project"
+
+    always open top project directory (if there is one) or dialog to select one of top directories
 
 ---
 
-Simple FAQ on [main project site](https://github.com/afterdesign/MacTerminal).
-If you have any questions just ping me on [twitter](http://twitter.com/afterdeign) or
-simply write [issue on github](https://github.com/afterdesign/MacTerminal/issues).
+terminal: "terminal"
+
+    DEFAULT
+    open Terminal.app
+
+terminal: "iterm"
+
+    open iterm2.app (version 3)
 
 ---
+
+debug: false
+
+    DEFAULT
+    don't print debug message in sublime console
+
+debug: true
+
+    print debug message in sublime console
+
+---
+
+osascript: "/usr/bin/osascript"
+
+    Path to OSA scripts executor (AppleScript, JavaScript, etc.)
