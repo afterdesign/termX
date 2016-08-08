@@ -119,7 +119,7 @@ Default option is ```file``` and you can change it to ```project```:
     From now on if you have only 1 directory added to project it's going to be opened by default.
     If you have more than 1 directory in your project you'll see quickpanel to select what you would like to open.
 
-    ![](https://raw.github.com/afterdesign/MacTerminal/master/messages/macterminal_2.gif)
+    ![](https://raw.github.com/afterdesign/termX/master/messages/termx_2.gif)
 
     Thanks [@dirajkumar](https://github.com/dirajkumar) for the idea !
 
@@ -130,10 +130,10 @@ Default option is ```file``` and you can change it to ```project```:
 
     After this try to open terminal again. If it's not working (and debug shouldn't repair the problem)
     open sublime console (default shortcut is ``` ctrl+` ```) and open new issue with log
-    between ```---MacTerminal Debug Start---``` and ```---MacTerminal Debug End---```.
+    between ```---termX Debug Start---``` and ```---termX Debug End---```.
 
     You can always ping me on [twitter](http://twitter.com/afterdeign) or
-    simply write [issue on github](https://github.com/afterdesign/MacTerminal/issues).
+    simply write [issue on github](https://github.com/afterdesign/termX/issues).
 
 # Contact
 

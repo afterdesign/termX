@@ -12,7 +12,9 @@ import sublime_plugin
 from pprint import pprint
 from decimal import Decimal
 
+
 class PathPicker(object):
+
     '''
     Class to manage paths for files
     '''
@@ -61,7 +63,7 @@ class PathPicker(object):
 
         return paths
 
-    def get_path_for_currently_open_file(self, paths): # pylint: disable=invalid-name
+    def get_path_for_currently_open_file(self, paths):  # pylint: disable=invalid-name
         '''
         Get paths for currently open tab in sublime
         '''
@@ -82,7 +84,9 @@ class PathPicker(object):
 
         return paths
 
-class OpenMacTerminal(sublime_plugin.TextCommand):
+
+class OpenTermxTerminal(sublime_plugin.TextCommand):
+
     '''
     Class is opening new terminal window with the path of current file
     '''
@@ -90,7 +94,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):
     def __init__(self, *args, **kwargs):
         sublime_plugin.TextCommand.__init__(self, *args, **kwargs)
 
-        self.settings = sublime.load_settings('MacTerminal.sublime-settings')
+        self.settings = sublime.load_settings('termX.sublime-settings')
         self.paths = []
         self.debug_info = {}
 
@@ -104,7 +108,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):
         # get settings
         directory_mode = self.settings.get('directory_mode', 'file')
 
-        paths_picker = PathPicker(self.view, selected_paths, directory_mode) # pylint: disable=no-member
+        paths_picker = PathPicker(self.view, selected_paths, directory_mode)  # pylint: disable=no-member
         self.paths = paths_picker.fetch_paths()
         self.open_terminal()
 
@@ -131,7 +135,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):
         Open quick selection window with paths
         '''
 
-        self.view.window().show_quick_panel( # pylint: disable=no-member
+        self.view.window().show_quick_panel(  # pylint: disable=no-member
             self.paths,
             self.open_selected_direcotory,
             sublime.MONOSPACE_FONT
@@ -172,7 +176,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):
         command.append(applescript_path)
         command.append(quoted_path)
 
-        #open terminal
+        # open terminal
         proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, startupinfo=None)
         (out, err) = proc.communicate()
 
@@ -181,6 +185,7 @@ class OpenMacTerminal(sublime_plugin.TextCommand):
         self.debug_info['process_out'] = out
         self.debug_info['process_err'] = err
 
+
 def debug(debug_info, debug_mode):
     '''
     show some debug stuff when needed
@@ -188,6 +193,6 @@ def debug(debug_info, debug_mode):
     if not debug_mode:
         return False
 
-    pprint("---MacTerminal DEBUG START---")
+    pprint("---termX DEBUG START---")
     pprint(debug_info)
-    pprint("---MacTerminal DEBUG END---")
+    pprint("---termX DEBUG END---")
