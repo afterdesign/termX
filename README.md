@@ -32,7 +32,7 @@ Sublime Text 2 -> Preferences -> Package Settings -> termX -> Key Bindings - Use
 And set something similar to:
 
 ```json
-{ "keys": ["super+t"], "command": "open_terminal" }
+{ "keys": ["super+t"], "command": "open_termx_terminal" }
 ```
 
 # iTerm 2 (v3 - current stable) support
