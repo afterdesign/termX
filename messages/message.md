@@ -11,7 +11,7 @@ SETTINGS:
 OPTIONS:
 
     {
-        "terminal" : "terminal/iterm",
+        "terminal" : "terminal/iterm/hyper",
         "osascript" : "/usr/bin/osascript",
         "debug" : false/true,
         "directory_mode" : "file/project"
@@ -39,6 +39,10 @@ terminal: "terminal"
 terminal: "iterm"
 
     open iterm2.app (version 3)
+
+terminal: "hyper"
+
+    open hyper.app (version 6)
 
 ---
 

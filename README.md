@@ -32,12 +32,14 @@ Sublime Text 2 -> Preferences -> Package Settings -> termX -> Key Bindings - Use
 And set something similar to:
 
 ```json
-{ "keys": ["super+t"], "command": "open_termx_terminal" }
+{ "keys": ["ctrl+super+t"], "command": "open_termx_terminal" }
 ```
 
-# iTerm 2 (v3 - current stable) support
+# Alternative terminals:
 
-By default this plugin is using native ```Terminal.app``` but [iTerm2](http://iterm2.com) is way cooler so download it.
+By default this plugin is using native ```Terminal.app```.
+You can also use [iTerm2](http://iterm2.com) and (thanks to awesome [@JohnBehnke](https://github.com/JohnBehnke)) [Hyper](http://hyper.is).
+
 To change settings edit:
 
 ```
@@ -48,7 +50,7 @@ And change terminal setting to ```iterm``` (default is ```terminal```):
 
 ```json
 {
-    "terminal"   :  "terminal/iterm"
+    "terminal"   :  "terminal/iterm/hyper"
 }
 ```
 
@@ -137,8 +139,9 @@ Default option is ```file``` and you can change it to ```project```:
 
 # Contact
 
-You can ping or follow me on twitter: [@afterdesign](http://twitter.com/afterdesign)
+All info about me you can find on my "goto page": [http://malinowski.be](https://malinowski.be) or just ping me on twitter: [@afterdesign](http://twitter.com/afterdesign)
 
 # License
 
 Licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
