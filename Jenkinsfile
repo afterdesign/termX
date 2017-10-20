@@ -7,11 +7,16 @@ pipeline {
                 id: 'userInput',
                 message: 'Let\'s promote?',
                 parameters: [
-                  [$class: 'StringParameterDefinition', description: 'Environment', name: 'env']
+                  [$class: 'StringParameterDefinition', description: 'Environment', name: 'test']
                 ]
               )
-              echo "Hello"
+              echo "Hello ${params.test}"
             }
+        }
+        stage('Print') {
+          steps {
+            echo "Hello ${params.test}"
+          }
         }
     }
 }
