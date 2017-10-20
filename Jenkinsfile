@@ -3,19 +3,22 @@ pipeline {
     stages {
         stage('Example') {
           steps {
-            userInput = input(
-              id: 'userInput',
-              message: 'Let\'s promote?',
+            script {
+              def env.VERSION_TO_DEPLOY = input message: 'Version to deploy',
               parameters: [
-                [$class: 'StringParameterDefinition', description: 'Environment', name: 'test']
+                string(
+                  name: 'Branch to deploy',
+                  description: 'What branch you wont deploy?',
+                  defaultValue: 'latest'
+                )
               ]
-            )
-            echo (userInput['test'])
+            }
+            echo ${VERSION_TO_DEPLOY}
           }
         }
         stage('Print') {
           steps {
-            echo (userInput['test'])
+            echo $VERSION_TO_DEPLOY
           }
         }
     }
