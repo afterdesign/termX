@@ -13,7 +13,7 @@ pipeline {
             )
           ]
         }
-        echo ${VERSION_TO_DEPLOY}
+        echo("${env.VERSION_TO_DEPLOY}")
       }
     }
   }
