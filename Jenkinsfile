@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Example') {
           steps {
-            input(
+            userInput = input(
               id: 'userInput',
               message: 'Let\'s promote?',
               parameters: [
