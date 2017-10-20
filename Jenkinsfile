@@ -17,6 +17,7 @@ pipeline {
             def test = "test"
         }
         echo("${env.VERSION_TO_DEPLOY}")
+        echo("${test}")
       }
     }
   }
