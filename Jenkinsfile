@@ -4,6 +4,7 @@ pipeline {
     stage('clone') {
       steps {
         input 'test'
+        input(submitterParameter: 'branch', message: 'Select branch')
       }
     }
     stage('print message') {
