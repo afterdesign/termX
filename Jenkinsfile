@@ -3,10 +3,10 @@ pipeline {
   stages {
     stage('clone') {
       steps {
-        input(message: 'test', id: 'test', ok: 'test')
+        input 'test'
       }
     }
-    stage('') {
+    stage('print message') {
       steps {
         echo '$test'
       }
