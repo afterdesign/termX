@@ -2,20 +2,24 @@ pipeline {
     agent any
     stages {
         stage('Example') {
-            steps {
-              def userInput = input(
-                id: 'userInput',
-                message: 'Let\'s promote?',
-                parameters: [
-                  [$class: 'StringParameterDefinition', description: 'Environment', name: 'env']
-                ]
-              )
-              echo ("Env1: "+userInput['env'])
-            }
+          steps {
+            input(
+              id: 'userInput',
+              message: 'Let\'s promote?',
+              parameters: [
+                [$class: 'StringParameterDefinition', description: 'Environment', name: 'test']
+              ]
+            )
+            echo +test
+            echo $test
+            echo ${test}
+          }
         }
         stage('Print') {
           steps {
-            echo ("Env2: "+userInput['env'])
+            echo +test
+            echo $test
+            echo ${test}
           }
         }
     }
