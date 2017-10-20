@@ -1,24 +1,13 @@
 pipeline {
-  agent any
-  stages {
-    stage('clone') {
-      steps {
-        input(
-          id: 'Proceed1',
-          message: 'Was this successful?',
-          parameters: [
-            [
-              $class: 'StringParameterDefinition',
-              description: '',
-              name: 'Please confirm you agree with this'
-            ]
-        ])
-      }
+    agent any
+    parameters {
+        string(name: 'PERSON', description: 'Who should I say hello to?')
     }
-    stage('print message') {
-      steps {
-        echo '$test'
-      }
+    stages {
+        stage('Example') {
+            steps {
+                echo "Hello ${params.PERSON}"
+            }
+        }
     }
-  }
 }
