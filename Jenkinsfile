@@ -3,19 +3,19 @@ pipeline {
     stages {
         stage('Example') {
             steps {
-              input(
+              def userInput = input(
                 id: 'userInput',
                 message: 'Let\'s promote?',
                 parameters: [
-                  [$class: 'StringParameterDefinition', description: 'Environment', name: 'test']
+                  [$class: 'StringParameterDefinition', description: 'Environment', name: 'env']
                 ]
               )
-              echo "Hello ${params.test}"
+              echo ("Env1: "+userInput['env'])
             }
         }
         stage('Print') {
           steps {
-            echo "Hello ${params.test}"
+            echo ("Env2: "+userInput['env'])
           }
         }
     }
