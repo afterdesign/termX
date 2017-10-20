@@ -10,16 +10,12 @@ pipeline {
                 [$class: 'StringParameterDefinition', description: 'Environment', name: 'test']
               ]
             )
-            echo +test
-            echo $test
-            echo ${test}
+            echo ("+userInput['test']")
           }
         }
         stage('Print') {
           steps {
-            echo +test
-            echo $test
-            echo ${test}
+            echo ("+userInput['test']")
           }
         }
     }
