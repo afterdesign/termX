@@ -1,20 +1,11 @@
 pipeline {
-  agent any
-  stages {
+    agent any
     stage('Example') {
-      steps {
-        script {
-          env.VERSION_TO_DEPLOY = input message: 'Version to deploy',
-          parameters: [
-            string(
-              name: 'Version to relink',
-              description: '',
-              defaultValue: 'latest'
-            )
-          ]
+        steps {
+            def userInput = input(id: 'userInput', message: 'Select the next stage:', parameters: [
+                [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Run QA tests', name: 'QA'],
+                [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Run performance tests', name: 'performance']
+            ])
         }
-        echo("${env.VERSION_TO_DEPLOY}")
-      }
     }
-  }
 }
