@@ -1,12 +1,16 @@
 pipeline {
     agent any
-    parameters {
-        string(name: 'PERSON', description: 'Who should I say hello to?')
-    }
     stages {
         stage('Example') {
             steps {
-                echo "Hello ${params.PERSON}"
+              input(
+                id: 'userInput',
+                message: 'Let\'s promote?',
+                parameters: [
+                  [$class: 'StringParameterDefinition', description: 'Environment', name: 'env']
+                ]
+              )
+              echo "Hello"
             }
         }
     }
