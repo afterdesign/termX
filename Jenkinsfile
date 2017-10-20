@@ -13,6 +13,7 @@ pipeline {
             )
           ]
         }
+        echo ${VERSION_TO_DEPLOY}
       }
     }
   }
