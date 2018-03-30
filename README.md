@@ -68,7 +68,7 @@ Default option is ```file``` and you can change it to ```project```:
 
 ```json
 {
-    directory_mode" : "file/project"
+    "directory_mode" : "file/project"
 }
 ```
 
