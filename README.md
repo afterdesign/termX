@@ -26,7 +26,7 @@ ctrl+cmd+t
 To change it go to:
 
 ```
-Sublime Text 2 -> Preferences -> Package Settings -> termX -> Key Bindings - User
+Sublime Text 2 -> Preferences -> Package Settings -> termX -> Key Bindings
 ```
 
 And set something similar to:
@@ -144,4 +144,3 @@ All info about me you can find on my "goto page": [http://malinowski.be](https:/
 # License
 
 Licensed under the [MIT license](http://opensource.org/licenses/MIT).
-
