@@ -1,7 +1,7 @@
 [
     {"caption":"-", "id":"side-bar-terminal-separator"},
     {
-        "caption": "Open in terminal",
+        "caption": "Open in Terminal",
         "id": "side-bar-new-terminal",
         "command": "open_termx_terminal",
         "args" : {
