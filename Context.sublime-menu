@@ -1,0 +1,10 @@
+[
+    {
+        "caption": "Open Terminal Here",
+        "id": "side-bar-new-terminal",
+        "command": "open_termx_terminal",
+        "args" : {
+            "paths" : []
+        }
+    }
+]
