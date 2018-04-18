@@ -16,34 +16,20 @@
                         "children":
                         [
                             {
-                                "command": "open_file", "args":
+                                "caption": "Settings",
+                                "command": "edit_settings", "args":
                                 {
-                                    "file": "${packages}/termX/termX.sublime-settings"
-                                },
-                                "caption": "Settings – Default"
+                                    "base_file": "${packages}/termX/termX.sublime-settings",
+                                    "default": "// termX Settings - User\n{\n\t$0\n}\n"
+                                }
                             },
                             {
-                                "command": "open_file", "args":
+                                "caption": "Key Bindings",
+                                "command": "edit_settings", "args":
                                 {
-                                    "file": "${packages}/User/termX.sublime-settings"
-                                },
-                                "caption": "Settings – User"
-                            },
-                            { "caption": "-" },
-                            {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/termX/Default.sublime-keymap"
-                                },
-                                "caption": "Key Bindings – Default"
-                            },
-                            {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/User/Default (OSX).sublime-keymap",
-                                    "platform": "OSX"
-                                },
-                                "caption": "Key Bindings – User"
+                                    "base_file": "${packages}/termX/Default ($platform).sublime-keymap",
+                                    "default": "${packages}/User/Default ($platform).sublime-keymap"
+                                }
                             }
                         ]
                     }

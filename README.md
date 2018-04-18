@@ -26,7 +26,7 @@ ctrl+cmd+t
 To change it go to:
 
 ```
-Sublime Text 2 -> Preferences -> Package Settings -> termX -> Key Bindings - User
+Sublime Text 2 -> Preferences -> Package Settings -> termX -> Key Bindings
 ```
 
 And set something similar to:
@@ -68,7 +68,7 @@ Default option is ```file``` and you can change it to ```project```:
 
 ```json
 {
-    directory_mode" : "file/project"
+    "directory_mode" : "file/project"
 }
 ```
 
@@ -144,4 +144,3 @@ All info about me you can find on my "goto page": [http://malinowski.be](https:/
 # License
 
 Licensed under the [MIT license](http://opensource.org/licenses/MIT).
-
