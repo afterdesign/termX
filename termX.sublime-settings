@@ -1,6 +1,19 @@
 {
+	// Which application to run as your terminal. Available options:
+	// - terminal
+	// - iterm
+	// - hyper
     "terminal" : "terminal",
+
+    // The path to osascript.
+    // Run `which osascript` in a terminal to find this path on your system.
     "osascript" : "/usr/bin/osascript",
+
+    // Print additional info to the console for debugging problems.
     "debug" : false,
+
+    // Where to open the new terminal. Options:
+    // - file: in the directory of the current file.
+    // - project: in the first directory open in the sidebar.
     "directory_mode" : "file"
 }
