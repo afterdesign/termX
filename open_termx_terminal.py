@@ -88,7 +88,7 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
         '''
 
         selected_paths = kwargs.get('paths', [])
-        paths_picker = PathPicker(self.window.active_view(), selected_paths)  # pylint: disable=no-member
+        paths_picker = PathPicker(self.window.active_view(), selected_paths)
         self.paths = paths_picker.fetch_paths()
         self.open_terminal()
         self.debug_info['paths'] = self.paths
@@ -138,14 +138,15 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
 
         # get osascript from settings or just use default value
         command.append(self.settings.get('osascript', '/usr/bin/osascript'))
-
-        if Decimal(".".join(platform.mac_ver()[0].split(".")[:2])) >= Decimal('10.10'):
+        version = '.'.join(platform.mac_ver()[0].split(".")[:2])
+        if Decimal(version) >= Decimal('10.10'):
             ext_language = 'js'
         else:
             ext_language = 'scpt'
 
         # set path and terminal
-        applescript_path = '{packages_dir}/termX/termx_{terminal_name}.{ext}'.format(
+        tpl = '{packages_dir}/termX/termx_{terminal_name}.{ext}'
+        applescript_path = tpl.format(
             packages_dir=sublime.packages_path(),
             terminal_name=self.settings.get('terminal', 'terminal'),
             ext=ext_language
@@ -155,7 +156,11 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
         command.append(quoted_path)
 
         # open terminal
-        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, startupinfo=None)
+        proc = subprocess.Popen(
+                command,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                startupinfo=None)
         (out, err) = proc.communicate()
 
         self.debug_info['ext_language'] = ext_language
