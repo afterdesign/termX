@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 Sublime text plugin that opens terminal.
 '''
