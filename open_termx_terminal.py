@@ -85,14 +85,14 @@ class PathPicker(object):
         return paths
 
 
-class OpenTermxTerminal(sublime_plugin.TextCommand):
+class OpenTermxTerminal(sublime_plugin.WindowCommand):
 
     '''
     Class is opening new terminal window with the path of current file
     '''
 
     def __init__(self, *args, **kwargs):
-        sublime_plugin.TextCommand.__init__(self, *args, **kwargs)
+        sublime_plugin.WindowCommand.__init__(self, *args, **kwargs)
 
         self.settings = sublime.load_settings('termX.sublime-settings')
         self.paths = []
@@ -108,7 +108,7 @@ class OpenTermxTerminal(sublime_plugin.TextCommand):
         # get settings
         directory_mode = self.settings.get('directory_mode', 'file')
 
-        paths_picker = PathPicker(self.view, selected_paths, directory_mode)  # pylint: disable=no-member
+        paths_picker = PathPicker(self.window.active_view(), selected_paths, directory_mode)  # pylint: disable=no-member
         self.paths = paths_picker.fetch_paths()
         self.open_terminal()
 
@@ -135,7 +135,7 @@ class OpenTermxTerminal(sublime_plugin.TextCommand):
         Open quick selection window with paths
         '''
 
-        self.view.window().show_quick_panel(  # pylint: disable=no-member
+        self.window.show_quick_panel(  # pylint: disable=no-member
             self.paths,
             self.open_selected_direcotory,
             sublime.MONOSPACE_FONT
