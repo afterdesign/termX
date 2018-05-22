@@ -18,10 +18,9 @@ class PathPicker(object):
     Class to manage paths for files
     '''
 
-    def __init__(self, view, selected_paths, directory_mode):
+    def __init__(self, view, selected_paths):
         self.view = view
         self.selected_paths = selected_paths
-        self.directory_mode = directory_mode
 
     def fetch_paths(self):
         """
@@ -52,8 +51,10 @@ class PathPicker(object):
         '''
         Get all root directories for project
         '''
+        settings = sublime.load_settings('termX.sublime-settings')
+        directory_mode = settings.get('directory_mode')
 
-        if self.directory_mode == 'project':
+        if directory_mode == 'project':
             return self.view.window().folders()
         else:
             if self.view.file_name() is not None:
@@ -87,15 +88,9 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
         '''
 
         selected_paths = kwargs.get('paths', [])
-
-        # get settings
-        directory_mode = self.settings.get('directory_mode', 'file')
-
-        paths_picker = PathPicker(self.window.active_view(), selected_paths, directory_mode)  # pylint: disable=no-member
+        paths_picker = PathPicker(self.window.active_view(), selected_paths)  # pylint: disable=no-member
         self.paths = paths_picker.fetch_paths()
         self.open_terminal()
-
-        self.debug_info['directory_mode'] = directory_mode
         self.debug_info['paths'] = self.paths
 
         debug(self.debug_info, self.settings.get('debug', False))
