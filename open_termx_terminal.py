@@ -27,13 +27,14 @@ class PathPicker(object):
         """
         Get list of paths
         """
-        paths = self.get_paths_for_selected_items()
-        paths = self.get_project_paths(paths)
-        paths = self.get_path_for_currently_open_file(paths)
+        paths = []
+        paths += self.get_paths_from_selected_paths()
+        if not paths:
+            paths += self.get_project_paths()
 
         return list(set(paths))
 
-    def get_paths_for_selected_items(self):
+    def get_paths_from_selected_paths(self):
         '''
         Get paths for selected items in sidebar.
         '''
@@ -47,41 +48,24 @@ class PathPicker(object):
 
         return paths_to_choose
 
-    def get_project_paths(self, paths):
+    def get_project_paths(self):
         '''
-        Get all root directories for project.
+        Get all root directories for project
         '''
 
-        if len(paths) > 0:
-            return paths
-
-        if self.directory_mode != 'project':
-            return paths
-
-        paths = paths + self.view.window().folders()
-
-        return paths
-
-    def get_path_for_currently_open_file(self, paths):  # pylint: disable=invalid-name
-        '''
-        Get paths for currently open tab in sublime
-        '''
-        if len(paths) > 0:
-            return paths
-
-        if self.directory_mode != 'file':
-            return paths
-
-        if self.view.file_name() is not None:
-            paths.append(os.path.dirname(self.view.file_name()))
-
-        elif self.view.window().active_view().file_name() is not None:
-            paths.append(os.path.dirname(self.view.window().active_view().file_name()))
-
+        if self.directory_mode == 'project':
+            return self.view.window().folders()
         else:
-            paths = paths + self.view.window().folders()
-
-        return paths
+            if self.view.file_name() is not None:
+                p = []
+                p.append(os.path.dirname(self.view.file_name()))
+                return p
+            elif self.view.window().active_view().file_name() is not None:
+                p = []
+                p.append(os.path.dirname(self.view.window().active_view().file_name()))
+                return p
+            else:
+                return self.view.window().folders()
 
 
 class OpenTermxTerminal(sublime_plugin.WindowCommand):
