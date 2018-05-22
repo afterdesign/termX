@@ -97,27 +97,16 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
 
     def open_terminal(self):
         '''
-        Choose what to open - terminal with current path or quick selection window
+        Open a terminal with current path or quick selection window
         '''
-        if len(self.paths) == 0:
-            return False
-
         if len(self.paths) == 1:
             self.open_terminal_command(self.paths[0])
-            return True
-
-        self.show_directory_selection()
-
-    def show_directory_selection(self):
-        '''
-        Open quick selection window with paths
-        '''
-
-        self.window.show_quick_panel(  # pylint: disable=no-member
-            self.paths,
-            self.open_selected_direcotory,
-            sublime.MONOSPACE_FONT
-        )
+        elif len(self.paths) > 1:
+            self.window.show_quick_panel(
+                self.paths,
+                self.open_selected_direcotory,
+                sublime.MONOSPACE_FONT
+            )
 
     def open_selected_direcotory(self, selected_index):
         '''
