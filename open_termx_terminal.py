@@ -12,64 +12,42 @@ from pprint import pprint
 from decimal import Decimal
 
 
-class PathPicker(object):
-
+def get_paths_from_selection(selection):
     '''
-    Class to manage paths for files
+    Get paths for selected items in sidebar.
     '''
-
-    def __init__(self, view, selected_paths):
-        self.view = view
-        self.selected_paths = selected_paths
-
-    def fetch_paths(self):
-        """
-        Get list of paths
-        """
-        paths = []
-        paths += self.get_paths_from_selected_paths()
-        if not paths:
-            paths += self.get_project_paths()
-
-        return list(set(paths))
-
-    def get_paths_from_selected_paths(self):
-        '''
-        Get paths for selected items in sidebar.
-        '''
-
-        paths_to_choose = []
-        for single_path in self.selected_paths:
-            if os.path.isdir(single_path):
-                paths_to_choose.append(single_path)
-            else:
-                paths_to_choose.append(os.path.dirname(single_path))
-
-        return paths_to_choose
-
-    def get_project_paths(self):
-        '''
-        Get all root directories for project
-        '''
-        settings = sublime.load_settings('termX.sublime-settings')
-        directory_mode = settings.get('directory_mode')
-
-        if directory_mode == 'project':
-            return self.view.window().folders()
+    paths = []
+    for single_path in selection:
+        if os.path.isdir(single_path):
+            paths.append(single_path)
         else:
-            file = self.view.file_name()
-            if file is not None:
-                p = []
-                p.append(os.path.dirname(file))
-                return p
+            paths.append(os.path.dirname(single_path))
 
-            file = self.view.window().active_view().file_name()
-            if file is not None:
-                p = []
-                p.append(os.path.dirname(file))
-                return p
-            else:
-                return self.view.window().folders()
+    return paths
+
+
+def get_root_paths(view):
+    '''
+    Get all root directories for project
+    '''
+    return view.window().folders()
+
+
+def get_file_path(view):
+    '''
+    Get the directory of the current file
+    '''
+    file = view.file_name()
+    if file is not None:
+        p = []
+        p.append(os.path.dirname(file))
+        return p
+
+    file = view.window().active_view().file_name()
+    if file is not None:
+        p = []
+        p.append(os.path.dirname(file))
+        return p
 
 
 class OpenTermxTerminal(sublime_plugin.WindowCommand):
@@ -90,18 +68,19 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
         This method is invoked by sublime
         '''
 
-        selected_paths = kwargs.get('paths', [])
-        paths_picker = PathPicker(self.window.active_view(), selected_paths)
-        self.paths = paths_picker.fetch_paths()
-        self.open_terminal()
-        self.debug_info['paths'] = self.paths
+        project = kwargs.get('project', False)
+        if project:
+            paths = get_root_paths(self.window.active_view())
+        else:
+            paths = get_paths_from_selection(kwargs.get('paths', []))
 
+        if not paths:
+            paths = get_file_path(self.window.active_view())
+
+        self.paths = paths
+        self.debug_info['paths'] = self.paths
         debug(self.debug_info, self.settings.get('debug', False))
 
-    def open_terminal(self):
-        '''
-        Open a terminal with current path or quick selection window
-        '''
         if len(self.paths) == 1:
             self.open_terminal_command(self.paths[0])
         elif len(self.paths) > 1:

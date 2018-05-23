@@ -1,6 +1,13 @@
 [
   {
-    "caption": "Open in Terminal",
+    "caption": "Open Terminal Here",
     "command": "open_termx_terminal"
+  },
+  {
+    "caption": "Open Terminal at Project",
+    "command": "open_termx_terminal",
+    "args" : {
+        "project": true
+    }
   }
 ]

@@ -39,25 +39,8 @@ By default termX opens a new terminal in directory of the current file. You can 
 1. The "Open in terminal" is greyed out.
     This happens when there is no opened file and for now I don't know if
     this is just a sublime bug or I need to change something.
- 
 
-2. Can I always open main directory of project ?
-
-    Edit the settings and change `directory_mode` to `project`:
-    ```
-    {
-        "directory_mode" : "project"
-    }
-    ```
-
-    From now on if you have only 1 directory added to project it's going to be opened by default.
-    If you have more than 1 directory in your project you'll see quickpanel to select what you would like to open.
-
-    ![](https://raw.github.com/afterdesign/termX/master/messages/termx_2.gif)
-
-    Thanks [@dirajkumar](https://github.com/dirajkumar) for the idea !
-
-3. Its not working for me.
+2. Its not working for me.
 
     First of all enable `debug` mode. 
     To do this open your settings and add: `"debug": true`
