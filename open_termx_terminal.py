@@ -86,10 +86,10 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
         elif len(self.paths) > 1:
             self.window.show_quick_panel(
                 self.paths,
-                self.open_selected_direcotory
+                self.open_selected_directory
             )
 
-    def open_selected_direcotory(self, selected_index):
+    def open_selected_directory(self, selected_index):
         '''
         This method is invoked by sublime quick panel
         '''
