@@ -86,8 +86,7 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
         elif len(self.paths) > 1:
             self.window.show_quick_panel(
                 self.paths,
-                self.open_selected_direcotory,
-                sublime.MONOSPACE_FONT
+                self.open_selected_direcotory
             )
 
     def open_selected_direcotory(self, selected_index):
