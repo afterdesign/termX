@@ -79,7 +79,7 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
 
         self.paths = paths
         self.debug_info['paths'] = self.paths
-        debug(self.debug_info, self.settings.get('debug', False))
+        debug(self.debug_info)
 
         if len(self.paths) == 1:
             self.open_terminal_command(self.paths[0])
@@ -137,15 +137,15 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
         self.debug_info['cmd'] = ' '.join(command)
         self.debug_info['process_out'] = out
         self.debug_info['process_err'] = err
+        debug(self.debug_info)
 
 
-def debug(debug_info, debug_mode):
+def debug(debug_info):
     '''
     show some debug stuff when needed
     '''
-    if not debug_mode:
-        return False
-
-    pprint("---termX DEBUG START---")
-    pprint(debug_info)
-    pprint("---termX DEBUG END---")
+    settings = sublime.load_settings('termX.sublime-settings')
+    if settings.get('debug'):
+        pprint("---termX DEBUG START---")
+        pprint(debug_info)
+        pprint("---termX DEBUG END---")
