@@ -57,13 +57,16 @@ class PathPicker(object):
         if directory_mode == 'project':
             return self.view.window().folders()
         else:
-            if self.view.file_name() is not None:
+            file = self.view.file_name()
+            if file is not None:
                 p = []
-                p.append(os.path.dirname(self.view.file_name()))
+                p.append(os.path.dirname(file))
                 return p
-            elif self.view.window().active_view().file_name() is not None:
+
+            file = self.view.window().active_view().file_name()
+            if file is not None:
                 p = []
-                p.append(os.path.dirname(self.view.window().active_view().file_name()))
+                p.append(os.path.dirname(file))
                 return p
             else:
                 return self.view.window().folders()
