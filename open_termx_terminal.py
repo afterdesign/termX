@@ -93,10 +93,8 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
         '''
         This method is invoked by sublime quick panel
         '''
-        if selected_index == -1:
-            return False
-
-        self.open_terminal_command(self.paths[selected_index])
+        if selected_index != -1:
+            self.open_terminal_command(self.paths[selected_index])
 
     def open_terminal_command(self, path):
         '''
