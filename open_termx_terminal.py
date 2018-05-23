@@ -12,6 +12,11 @@ from pprint import pprint
 from decimal import Decimal
 
 
+def get_setting(setting):
+    settings = sublime.load_settings('termX.sublime-settings')
+    return settings.get(setting)
+
+
 def get_paths_from_selection(selection):
     '''
     Get paths for selected items in sidebar.
@@ -51,7 +56,6 @@ def get_file_path(view):
 
 
 class OpenTermxTerminal(sublime_plugin.WindowCommand):
-
     '''
     Class is opening new terminal window with the path of current file
     '''
@@ -59,7 +63,6 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
     def __init__(self, *args, **kwargs):
         sublime_plugin.WindowCommand.__init__(self, *args, **kwargs)
 
-        self.settings = sublime.load_settings('termX.sublime-settings')
         self.paths = []
         self.debug_info = {}
 
@@ -105,7 +108,7 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
         command = []
 
         # get osascript from settings or just use default value
-        command.append(self.settings.get('osascript', '/usr/bin/osascript'))
+        command.append(get_setting('osascript'))
         version = '.'.join(platform.mac_ver()[0].split(".")[:2])
         if Decimal(version) >= Decimal('10.10'):
             ext_language = 'js'
@@ -116,7 +119,7 @@ class OpenTermxTerminal(sublime_plugin.WindowCommand):
         tpl = '{packages_dir}/termX/termx_{terminal_name}.{ext}'
         applescript_path = tpl.format(
             packages_dir=sublime.packages_path(),
-            terminal_name=self.settings.get('terminal', 'terminal'),
+            terminal_name=get_setting('terminal'),
             ext=ext_language
         )
 
@@ -142,8 +145,7 @@ def debug(debug_info):
     '''
     show some debug stuff when needed
     '''
-    settings = sublime.load_settings('termX.sublime-settings')
-    if settings.get('debug'):
+    if get_setting('debug'):
         pprint("---termX DEBUG START---")
         pprint(debug_info)
         pprint("---termX DEBUG END---")
