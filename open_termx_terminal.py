@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 '''
 Sublime text plugin that opens terminal.
 '''
@@ -13,88 +12,57 @@ from pprint import pprint
 from decimal import Decimal
 
 
-class PathPicker(object):
+def get_setting(setting):
+    settings = sublime.load_settings('termX.sublime-settings')
+    return settings.get(setting)
 
+
+def get_paths_from_selection(selection):
     '''
-    Class to manage paths for files
+    Get paths for selected items in sidebar.
     '''
-
-    def __init__(self, view, selected_paths, directory_mode):
-        self.view = view
-        self.selected_paths = selected_paths
-        self.directory_mode = directory_mode
-
-    def fetch_paths(self):
-        """
-        Get list of paths
-        """
-        paths = self.get_paths_for_selected_items()
-        paths = self.get_project_paths(paths)
-        paths = self.get_path_for_currently_open_file(paths)
-
-        return list(set(paths))
-
-    def get_paths_for_selected_items(self):
-        '''
-        Get paths for selected items in sidebar.
-        '''
-
-        paths_to_choose = []
-        for single_path in self.selected_paths:
-            if os.path.isdir(single_path):
-                paths_to_choose.append(single_path)
-            else:
-                paths_to_choose.append(os.path.dirname(single_path))
-
-        return paths_to_choose
-
-    def get_project_paths(self, paths):
-        '''
-        Get all root directories for project.
-        '''
-
-        if len(paths) > 0:
-            return paths
-
-        if self.directory_mode != 'project':
-            return paths
-
-        paths = paths + self.view.window().folders()
-
-        return paths
-
-    def get_path_for_currently_open_file(self, paths):  # pylint: disable=invalid-name
-        '''
-        Get paths for currently open tab in sublime
-        '''
-        if len(paths) > 0:
-            return paths
-
-        if self.directory_mode != 'file':
-            return paths
-
-        if self.view.file_name() is not None:
-            paths.append(os.path.dirname(self.view.file_name()))
-
-        elif self.view.window().active_view().file_name() is not None:
-            paths.append(os.path.dirname(self.view.window().active_view().file_name()))
-
+    paths = []
+    for single_path in selection:
+        if os.path.isdir(single_path):
+            paths.append(single_path)
         else:
-            paths = paths + self.view.window().folders()
+            paths.append(os.path.dirname(single_path))
 
-        return paths
+    return paths
 
 
-class OpenTermxTerminal(sublime_plugin.TextCommand):
+def get_root_paths(view):
+    '''
+    Get all root directories for project
+    '''
+    return view.window().folders()
 
+
+def get_file_path(view):
+    '''
+    Get the directory of the current file
+    '''
+    file = view.file_name()
+    if file is not None:
+        p = []
+        p.append(os.path.dirname(file))
+        return p
+
+    file = view.window().active_view().file_name()
+    if file is not None:
+        p = []
+        p.append(os.path.dirname(file))
+        return p
+
+
+class OpenTermxTerminal(sublime_plugin.WindowCommand):
     '''
     Class is opening new terminal window with the path of current file
     '''
 
     def __init__(self, *args, **kwargs):
-        sublime_plugin.TextCommand.__init__(self, *args, **kwargs)
+        sublime_plugin.WindowCommand.__init__(self, *args, **kwargs)
 
-        self.settings = sublime.load_settings('termX.sublime-settings')
         self.paths = []
         self.debug_info = {}
 
@@ -103,52 +71,33 @@ class OpenTermxTerminal(sublime_plugin.TextCommand):
         This method is invoked by sublime
         '''
 
-        selected_paths = kwargs.get('paths', [])
+        project = kwargs.get('project', False)
+        if project:
+            paths = get_root_paths(self.window.active_view())
+        else:
+            paths = get_paths_from_selection(kwargs.get('paths', []))
 
-        # get settings
-        directory_mode = self.settings.get('directory_mode', 'file')
+        if not paths:
+            paths = get_file_path(self.window.active_view())
 
-        paths_picker = PathPicker(self.view, selected_paths, directory_mode)  # pylint: disable=no-member
-        self.paths = paths_picker.fetch_paths()
-        self.open_terminal()
-
-        self.debug_info['directory_mode'] = directory_mode
+        self.paths = paths
         self.debug_info['paths'] = self.paths
-
-        debug(self.debug_info, self.settings.get('debug', False))
-
-    def open_terminal(self):
-        '''
-        Choose what to open - terminal with current path or quick selection window
-        '''
-        if len(self.paths) == 0:
-            return False
+        debug(self.debug_info)
 
         if len(self.paths) == 1:
             self.open_terminal_command(self.paths[0])
-            return True
+        elif len(self.paths) > 1:
+            self.window.show_quick_panel(
+                self.paths,
+                self.open_selected_directory
+            )
 
-        self.show_directory_selection()
-
-    def show_directory_selection(self):
-        '''
-        Open quick selection window with paths
-        '''
-
-        self.view.window().show_quick_panel(  # pylint: disable=no-member
-            self.paths,
-            self.open_selected_direcotory,
-            sublime.MONOSPACE_FONT
-        )
-
-    def open_selected_direcotory(self, selected_index):
+    def open_selected_directory(self, selected_index):
         '''
         This method is invoked by sublime quick panel
         '''
-        if selected_index == -1:
-            return False
-
-        self.open_terminal_command(self.paths[selected_index])
+        if selected_index != -1:
+            self.open_terminal_command(self.paths[selected_index])
 
     def open_terminal_command(self, path):
         '''
@@ -159,17 +108,18 @@ class OpenTermxTerminal(sublime_plugin.TextCommand):
         command = []
 
         # get osascript from settings or just use default value
-        command.append(self.settings.get('osascript', '/usr/bin/osascript'))
-
-        if Decimal(".".join(platform.mac_ver()[0].split(".")[:2])) >= Decimal('10.10'):
+        command.append(get_setting('osascript'))
+        version = '.'.join(platform.mac_ver()[0].split(".")[:2])
+        if Decimal(version) >= Decimal('10.10'):
             ext_language = 'js'
         else:
             ext_language = 'scpt'
 
         # set path and terminal
-        applescript_path = '{packages_dir}/termX/termx_{terminal_name}.{ext}'.format(
+        tpl = '{packages_dir}/termX/termx_{terminal_name}.{ext}'
+        applescript_path = tpl.format(
             packages_dir=sublime.packages_path(),
-            terminal_name=self.settings.get('terminal', 'terminal'),
+            terminal_name=get_setting('terminal'),
             ext=ext_language
         )
 
@@ -177,22 +127,25 @@ class OpenTermxTerminal(sublime_plugin.TextCommand):
         command.append(quoted_path)
 
         # open terminal
-        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, startupinfo=None)
+        proc = subprocess.Popen(
+                command,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                startupinfo=None)
         (out, err) = proc.communicate()
 
         self.debug_info['ext_language'] = ext_language
         self.debug_info['cmd'] = ' '.join(command)
         self.debug_info['process_out'] = out
         self.debug_info['process_err'] = err
+        debug(self.debug_info)
 
 
-def debug(debug_info, debug_mode):
+def debug(debug_info):
     '''
     show some debug stuff when needed
     '''
-    if not debug_mode:
-        return False
-
-    pprint("---termX DEBUG START---")
-    pprint(debug_info)
-    pprint("---termX DEBUG END---")
+    if get_setting('debug'):
+        pprint("---termX DEBUG START---")
+        pprint(debug_info)
+        pprint("---termX DEBUG END---")

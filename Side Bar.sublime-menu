@@ -1,11 +1,10 @@
 [
     {"caption":"-", "id":"side-bar-terminal-separator"},
     {
-        "caption": "Open in Terminal",
-        "id": "side-bar-new-terminal",
+        "caption": "Open Terminal Here",
         "command": "open_termx_terminal",
         "args" : {
-            "paths" : []
+            "paths": []
         }
     }
 ]
